@@ -176,8 +176,44 @@ int main()
 		}
 		inf2.close();
 
+		
+		for(int j=0;j<files.size();j++)
+		{
+			for(int k=j+1;k<files.size();k++)
+			{
+				bool judgeE = 1;
+				string cmd1;
+				string cmd2;
 
+				string outpath1 = dirs[i] + "/out1.txt";
+				string outpath2 = dirs[i] + "/out2.txt";
 
+				cmd1 = "g++ " + files[j] + " -o "+ dirs[i]+"/a.out";
+				//cout<<cmd1<<endl;	
+				cmd2 = dirs[i] + "/a.out <"+inpath1 +" >"+outpath1;
+				//cout<<cmd2<<endl;
+				system(cmd1.c_str());
+				system(cmd2.c_str());		
+				
+				cmd1 = "g++ " + files[k]+ " -o "+ dirs[i]+"/b.out";
+				cmd2 = dirs[i]+ "/b.out <"+inpath1 +" >"+outpath2;
+				system(cmd1.c_str());
+				system(cmd2.c_str());
+
+				//cout<<"Debug22"<<endl;a
+
+	
+				cmd2 = dirs[i] + "/a.out <"+inpath2 +" >"+outpath1;
+				system(cmd2.c_str());		
+				
+				cmd2 = dirs[i]+ "/b.out <"+inpath2 +" >"+outpath2;
+				system(cmd2.c_str());
+
+			}
+		}
+
+		files.clear();
+		formstr.clear();
 
 	}
 
