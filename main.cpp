@@ -202,12 +202,93 @@ int main()
 
 				//cout<<"Debug22"<<endl;a
 
+				fstream outf1, outf2;
+				string ans1, ans2;
+				outf1.open(outpath1,ios::in);
+				if(!outf1) cout<<"error"<<endl;
+				char c;
+				while(!outf1.eof()) 
+				{
+					outf1 >> c;
+					ans1+=c;
+				}
+				outf1.close();
+				//cout<<ans1<<endl;
+
+				outf2.open(outpath2,ios::in);
+				if(!outf2) cout<<"error"<<endl;
+				while(!outf2.eof()) 
+				{
+					outf2 >> c;					
+					ans2+=c;
+				}
+				outf2.close();
+				//cout<<ans2<<endl;
+
+				if(ans1.size()!=ans2.size()) 
+					judgeE = 0;
+				for(int m=0;m<ans1.size();m++)
+				{
+					if(ans1[m]!=ans2[m])
+						judgeE = 0;
+				}
 	
 				cmd2 = dirs[i] + "/a.out <"+inpath2 +" >"+outpath1;
 				system(cmd2.c_str());		
 				
 				cmd2 = dirs[i]+ "/b.out <"+inpath2 +" >"+outpath2;
 				system(cmd2.c_str());
+				string ans3, ans4;
+
+				outf1.open(outpath1,ios::in);
+				if(!outf1) cout<<"error"<<endl;
+				while(!outf1.eof()) 
+				{
+					outf1 >> c;
+					ans3+=c;
+				}
+				outf1.close();
+				//cout<<ans1<<endl;
+
+				outf2.open(outpath2,ios::in);
+				if(!outf2) cout<<"error"<<endl;
+				while(!outf2.eof()) 
+				{
+					outf2 >> c;					
+					ans4+=c;
+				}
+				outf2.close();
+				//cout<<ans2<<endl;
+
+				if(ans3.size()!=ans4.size()) 
+					judgeE = 0;
+				for(int m=0;m<ans3.size();m++)
+				{
+					if(ans3[m]!=ans4[m])
+						judgeE = 0;
+				}
+
+				if(judgeE==1)
+				{
+					f1.open("output/equal.csv",ios::app);
+					if(!f1) cout<<"error"<<endl;
+					string::size_type posit1, posit2;
+					posit1 = files[j].find_first_of("i");
+					posit2 = files[k].find_first_of("i");
+					f1 <<files[j].substr(posit1,1000)<<","<<files[k].substr(posit2,1000)<<"\n";
+					f1.close();	
+				}
+				else
+				{					
+					f2.open("output/inequal.csv",ios::app);
+					if(!f2) cout<<"error"<<endl;
+					string::size_type posit1, posit2;
+					posit1 = files[j].find_first_of("i");
+					posit2 = files[k].find_first_of("i");
+					f2 <<files[j].substr(posit1,1000)<<","<<files[k].substr(posit2,1000)<<"\n";
+					
+					f2.close();
+				}
 
 			}
 		}
