@@ -10,10 +10,13 @@
 #include<dirent.h>
 #include<vector>
 #include<unistd.h>
+#include<ctime>
+#include<cstdlib>
 using namespace std;
 
 int main()
 {
+	srand((unsigned)time(0));
 	string buffer;
 	buffer = getcwd(NULL,0);	
 	
